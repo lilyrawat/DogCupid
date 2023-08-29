@@ -129,14 +129,14 @@ if (isset($_POST['email']) && $_POST['email'] != "") {
         <a href="#" class="btn">Get App</a>
       </div>
       <div class="app-img">
-        <img src="img/app.jpeg" alt="" />
+        <img src="img/app.jpg" alt="" />
       </div>
     </div>
   </section>
   <!-- About -->
   <section class="about" id="about">
     <div class="about-img">
-      <img src="img/about.jpeg" alt="" />
+      <img src="img/about.png" alt="" />
     </div>
     <div class="about-text">
       <h2>Find the True Love of Your Dog's Life Today.</h2>
