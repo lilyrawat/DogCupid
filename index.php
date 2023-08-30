@@ -1,21 +1,44 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+
 $message_sent = false;
 
 if (isset($_POST['email']) && $_POST['email'] != "") {
   if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
     //submit form
+    $mail = new PHPMailer(true);
+
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'rawatlily0@gmail.com';
+    $mail->Password = 'hnctzpvhwlxdaets';
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port = 465;
+
     $userName = $_POST['name'];
     $userEmail = $_POST['email'];
     $messageSubject = $_POST['subject'];
     $message = $_POST['message'];
-
-    $to = "b19090@students.iitmandi.ac.in";
     $body = "";
-    $body .= "From: " . $userName . "\r\n";
-    $body .= "Email: " . $userEmail . "\r\n";
-    $body .= "Message: " . $message . "\r\n";
+    $body .= "From: " . $userName . "\n";
+    $body .= "Email: " . $userEmail . "\n";
+    $body .= "Message: " . $message . "\n";
 
-    mail($to, $messageSubject, $body);
+    $mail->setFrom($userEmail);
+    $mail->FromName = $userName;
+    $mail->addAddress('rawatlily0@gmail.com');
+    $mail->isHTML(true);
+    $mail->Subject = $messageSubject;
+    $mail->Body = $body;
+
+    $mail->send();
     $message_sent = true;
   } else {
     $invalid_class_name = "form-invalid";
